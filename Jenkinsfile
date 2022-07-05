@@ -10,6 +10,7 @@ pipeline {
                 branch 'develop'
             }
             steps {
+                sh 'composer update'
                 sh 'composer install'
             }
         }
