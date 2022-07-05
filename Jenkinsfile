@@ -6,12 +6,17 @@ pipeline {
     agent { node {label 'jenkins-worker'}}
     stages {
         stage('Build') {
-            when {
-                branch 'develop'
-            }
+            // when {
+            //     branch 'develop'
+            // }
             steps {
                 sh 'composer update'
                 sh 'composer install'
+            }
+        }
+        stage('Test') {
+            steps {
+                sh 'vendor/bin/phpunit'
             }
         }
     }
