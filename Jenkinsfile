@@ -16,17 +16,17 @@ pipeline {
         }
         stage('Test') {
             steps {
-                sh 'vendor/bin/phpunit'
+                sh 'vendor/bin/phpunit5467'
             }
             post {
                 failure {
                     emailext subject: "Job '${env.JOB_NAME}' '${env.BUILD_NUMBER }' ",
-                        body: "<p>Check console output at '${env.BUILD_URL}'</p>",
+                        body: "<p>A build falhou at '${env.BUILD_URL}'</p>",
                         recipientProviders: [developers(), requestor()]
                 }
                 success {
                     emailext subject: "Job '${env.JOB_NAME}' '${env.BUILD_NUMBER }' ",
-                        body: "<p>Check console output at '${env.BUILD_URL}'</p>",
+                        body: "<p>A build foi feita com sucesso '${env.BUILD_URL}'</p>",
                         to: 'rafa.rutsatz@gmail.com'
                 }
             }
