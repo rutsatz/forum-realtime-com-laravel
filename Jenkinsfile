@@ -27,7 +27,7 @@ pipeline {
                 success {
                     emailext subject: "Job '${env.JOB_NAME}' '${env.BUILD_NUMBER }' ",
                         body: "<p>Check console output at '${env.BUILD_URL}'</p>",
-                        to: 'rutsatz@hotmail.com.br'
+                        to: 'rafa.rutsatz@gmail.com'
                 }
             }
         }
