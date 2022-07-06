@@ -19,10 +19,14 @@ pipeline {
                 sh 'vendor/bin/phpunit'
             }
             post {
-                always {
-                    emailext body: 'Test Message',
-                        recipientProviders: [developers(), requestor()],
-                        subject: 'Test Subject',
+                failure {
+                    emailext subject: "Job '${env.JOB_NAME}' '${env.BUILD_NUMBER }' ",
+                        body: "<p>Check console output at '${env.BUILD_URL}'</p>",
+                        recipientProviders: [developers(), requestor()]
+                }
+                success {
+                    emailext subject: "Job '${env.JOB_NAME}' '${env.BUILD_NUMBER }' ",
+                        body: "<p>Check console output at '${env.BUILD_URL}'</p>",
                         to: 'rutsatz@hotmail.com.br'
                 }
             }
