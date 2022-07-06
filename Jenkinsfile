@@ -19,5 +19,13 @@ pipeline {
                 sh 'vendor/bin/phpunit'
             }
         }
+        post {
+            always {
+                emailext body: 'Test Message',
+                    recipientProviders: [developers(), requestor()],
+                    subject: 'Test Subject',
+                    to: 'rutsatz@hotmail.com.br'
+            }
+        }
     }
 }
